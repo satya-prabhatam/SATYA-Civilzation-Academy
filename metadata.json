@@ -1,0 +1,6 @@
+{
+  "name": "Satya Civilization Academy",
+  "description": "Cinematic landing page for Satya Civilization Academy featuring a glowing lotus animation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
