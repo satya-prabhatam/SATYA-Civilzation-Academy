@@ -29,16 +29,17 @@ export function Home({ onViewChange }: { onViewChange: (view: string) => void })
   return (
     <>
       {/* Hero Section */}
-      <section ref={heroRef} className="relative h-screen flex flex-col items-center justify-center z-10 px-4">
+      <section ref={heroRef} className="relative h-screen flex flex-col items-center justify-center z-10 px-4 overflow-hidden">
         <motion.div 
           style={{ opacity: heroOpacity, scale: heroScale, y: heroY, filter: heroFilter }} 
-          className="flex flex-col items-center w-full max-w-4xl"
+          className="flex flex-col items-center w-full max-w-4xl relative z-10"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 2, ease: "easeOut" }}
-            className="mb-8 w-64 md:w-96"
+            className="mb-8 w-[250px] h-[250px] md:w-[350px] md:h-[350px] flex items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            style={{ marginTop: '-150px' }}
           >
             <GeometricLotus />
           </motion.div>
@@ -47,7 +48,7 @@ export function Home({ onViewChange }: { onViewChange: (view: string) => void })
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 1 }}
-            className="text-4xl sm:text-5xl md:text-7xl font-serif text-center font-medium tracking-tight mb-6"
+            className="text-4xl sm:text-5xl md:text-7xl font-serif text-center font-medium tracking-tight mb-6 mt-[350px]"
           >
             <span className="block text-white/80 text-xl sm:text-2xl md:text-3xl mb-4 tracking-widest">WELCOME TO</span>
             <span className="text-gradient">Satya Civilization Academy</span>
@@ -106,13 +107,16 @@ export function Home({ onViewChange }: { onViewChange: (view: string) => void })
               Read Full Vision
             </button>
           </div>
-          <div className="relative aspect-square rounded-full border border-gold-500/20 flex items-center justify-center p-12 overflow-hidden mx-auto w-full max-w-[400px]">
-             <div className="absolute inset-0 bg-gold-500/5 rounded-full backdrop-blur-sm" />
-             <div className="relative z-10 opacity-40 w-full h-full">
+          <div className="relative aspect-square rounded-full border border-gold-500/30 flex items-center justify-center p-8 md:p-12 overflow-hidden mx-auto w-full max-w-[400px] shadow-[0_0_50px_rgba(194,153,43,0.1)] group">
+             <div className="absolute inset-0 bg-black rounded-full" />
+             <div className="absolute inset-0 stars rounded-full opacity-60 mix-blend-screen" />
+             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)] rounded-full" />
+             <div className="relative z-10 w-full h-full flex items-center justify-center transition-transform duration-1000 group-hover:scale-110">
                 <GeometricLotus />
              </div>
-             <div className="absolute inset-0 border-[0.5px] border-gold-500/10 rounded-full animate-[spin_60s_linear_infinite]" />
-             <div className="absolute inset-8 border-[0.5px] border-gold-500/20 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
+             <div className="absolute inset-0 border-[1px] border-gold-500/20 rounded-full animate-[spin_60s_linear_infinite]" />
+             <div className="absolute inset-4 border-[1px] border-gold-500/30 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
+             <div className="absolute inset-8 border-[1px] border-white/10 rounded-full animate-[spin_30s_linear_infinite]" />
           </div>
         </motion.div>
       </section>
@@ -161,7 +165,14 @@ export function Home({ onViewChange }: { onViewChange: (view: string) => void })
               {
                 icon: <HeartPulse className="w-10 h-10 text-gold-400 mb-8" />,
                 title: "Wellness & Healthcare",
-                desc: "Prevent disease and improve quality of life combining Ayurveda and Modern medicine."
+                desc: (
+                  <>
+                    Prevent disease and improve quality of life combining Ayurveda and Modern medicine.{' '}
+                    <a href="https://beboldbu.netlify.app" target="_blank" rel="noopener noreferrer" className="text-gold-300 hover:text-white underline underline-offset-4 decoration-gold-500/30 transition-colors mt-2 block">
+                      Visit BeBoldBu
+                    </a>
+                  </>
+                )
               },
               {
                 icon: <Building2 className="w-10 h-10 text-gold-400 mb-8" />,

@@ -7,6 +7,8 @@ import { Join } from './pages/Join';
 import { Apply } from './pages/Apply';
 import { Charter } from './pages/Charter';
 import { Contact } from './pages/Contact';
+import { RippleEffect } from './components/RippleEffect';
+import { HeartbeatEffect } from './components/HeartbeatEffect';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('home');
@@ -33,6 +35,9 @@ export default function App() {
       </motion.div>
 
       <Navigation currentView={currentView} onViewChange={setCurrentView} />
+
+      <RippleEffect />
+      <HeartbeatEffect />
 
       <main className="relative z-10">
         {currentView === 'home' && <Home onViewChange={setCurrentView} />}
