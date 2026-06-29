@@ -21,8 +21,6 @@ interface Idea {
   createdAt: any;
   keyPoints?: string;
   comments?: Comment[];
-  likes?: number;
-  collabRequested?: boolean;
 }
 
 export function Space() {
@@ -209,36 +207,26 @@ export function Space() {
 
   const handleDeletePost = async (ideaId: string) => {
     if (!user) return;
-    try {
-      await deleteDoc(doc(db, 'posts', ideaId));
-      setOpenMenuId(null);
-    } catch (error) {
-      console.error("Error deleting idea: ", error);
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      try {
+        await deleteDoc(doc(db, 'posts', ideaId));
+        setOpenMenuId(null);
+      } catch (error) {
+        console.error("Error deleting idea: ", error);
+      }
     }
   };
 
-  const handleLike = async (ideaId: string, currentLikes: number = 0, e: React.MouseEvent) => {
+  const handleLike = (e: React.MouseEvent) => {
     e.stopPropagation();
-    try {
-      await updateDoc(doc(db, 'posts', ideaId), {
-        likes: currentLikes + 1
-      });
-      setOpenMenuId(null);
-    } catch (error) {
-      console.error("Error liking: ", error);
-    }
+    alert("Liked!");
+    setOpenMenuId(null);
   };
 
-  const handleCollab = async (ideaId: string, e: React.MouseEvent) => {
+  const handleCollab = (e: React.MouseEvent) => {
     e.stopPropagation();
-    try {
-      await updateDoc(doc(db, 'posts', ideaId), {
-        collabRequested: true
-      });
-      setOpenMenuId(null);
-    } catch (error) {
-      console.error("Error requesting collab: ", error);
-    }
+    alert("Collab requested with Satya Supervision!");
+    setOpenMenuId(null);
   };
 
   const handleDownload = (idea: Idea) => {
@@ -422,7 +410,7 @@ export function Space() {
                         </>
                       )}
                       <button
-                        onClick={(e) => handleLike(idea.id, idea.likes || 0, e)}
+                        onClick={handleLike}
                         className="w-full text-left px-4 py-3 flex items-center gap-3 text-sm text-white/80 hover:bg-white/5 transition-colors"
                       >
                         <Heart className="w-4 h-4" /> Like
@@ -438,7 +426,7 @@ export function Space() {
                         <MessageSquare className="w-4 h-4" /> Comment
                       </button>
                       <button
-                        onClick={(e) => handleCollab(idea.id, e)}
+                        onClick={handleCollab}
                         className="w-full text-left px-4 py-3 flex items-center gap-3 text-sm text-white/80 hover:bg-white/5 transition-colors"
                       >
                         <Users className="w-4 h-4" /> Collab with Satya Supervision
@@ -477,7 +465,7 @@ export function Space() {
               )}
 
               {/* Action Bar */}
-              <div className="flex flex-wrap gap-4 border-t border-white/10 pt-4 mt-6">
+              <div className="flex gap-4 border-t border-white/10 pt-4 mt-6">
                  <button 
                   onClick={() => setCommentingOn(commentingOn === idea.id ? null : idea.id)}
                   className="flex items-center gap-2 text-white/50 hover:text-white/80 text-sm transition-colors"
@@ -485,18 +473,6 @@ export function Space() {
                   <MessageSquare className="w-4 h-4" /> 
                   Discuss ({(commentsMap[idea.id] || []).length})
                  </button>
-                 
-                 {idea.likes ? (
-                   <div className="flex items-center gap-2 text-gold-400/80 text-sm">
-                     <Heart className="w-4 h-4" /> {idea.likes}
-                   </div>
-                 ) : null}
-
-                 {idea.collabRequested && (
-                   <div className="flex items-center gap-2 text-blue-400/80 text-sm">
-                     <Users className="w-4 h-4" /> Collab Pending
-                   </div>
-                 )}
               </div>
 
               {/* Comments Section */}
