@@ -224,6 +224,30 @@ export function Home({ onViewChange }: { onViewChange: (view: string) => void })
         </div>
       </section>
 
+      {/* Community Section */}
+      <section className="relative py-32 z-10 px-6 bg-black/60 border-y border-white/5">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <h2 className="text-3xl md:text-5xl font-serif text-white mb-6">Our Global Community</h2>
+            <div className="w-20 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-8" />
+            <p className="text-white/60 font-light text-lg md:text-xl leading-relaxed mb-10 max-w-3xl mx-auto">
+              Join a network of visionaries, builders, and seekers dedicated to conscious evolution. Collaborate on real-world initiatives and engage in our digital sanctuary.
+            </p>
+            <button
+              onClick={() => onViewChange('community')}
+              className="px-8 py-4 bg-transparent border border-gold-500/30 text-gold-300 font-sans uppercase tracking-[0.15em] text-sm hover:bg-gold-500 hover:text-black transition-all duration-500"
+            >
+              Explore Community
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Footer / CTA */}
       <footer id="join" className="relative py-32 md:py-48 z-10 px-6 text-center">
         <motion.div

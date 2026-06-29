@@ -1,0 +1,52 @@
+{
+  "collections": [
+    {
+      "name": "posts",
+      "fields": [
+        { "name": "content", "type": "string" },
+        { "name": "authorId", "type": "string" },
+        { "name": "authorName", "type": "string" },
+        { "name": "createdAt", "type": "timestamp" },
+        { "name": "keyPoints", "type": "string", "optional": true }
+      ],
+      "rules": {
+        "read": "true",
+        "create": "request.auth != null && request.resource.data.authorId == request.auth.uid",
+        "update": "request.auth != null && request.resource.data.authorId == request.auth.uid",
+        "delete": "request.auth != null && resource.data.authorId == request.auth.uid"
+      },
+      "subcollections": [
+        {
+          "name": "comments",
+          "fields": [
+            { "name": "content", "type": "string" },
+            { "name": "authorId", "type": "string" },
+            { "name": "authorName", "type": "string" },
+            { "name": "createdAt", "type": "timestamp" }
+          ],
+          "rules": {
+            "read": "true",
+            "create": "request.auth != null && request.resource.data.authorId == request.auth.uid",
+            "update": "request.auth != null && request.resource.data.authorId == request.auth.uid",
+            "delete": "request.auth != null && resource.data.authorId == request.auth.uid"
+          }
+        }
+      ]
+    },
+    {
+      "name": "messages",
+      "fields": [
+        { "name": "content", "type": "string" },
+        { "name": "authorId", "type": "string" },
+        { "name": "authorName", "type": "string" },
+        { "name": "createdAt", "type": "timestamp" }
+      ],
+      "rules": {
+        "read": "true",
+        "create": "request.auth != null && request.resource.data.authorId == request.auth.uid",
+        "update": "false",
+        "delete": "false"
+      }
+    }
+  ]
+}

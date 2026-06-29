@@ -1,9 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogIn, UserCircle, LogOut } from 'lucide-react';
+import { auth, signInWithPopup, GoogleAuthProvider } from '../lib/firebase';
 
 export function Navigation({ currentView, onViewChange }: { currentView: string, onViewChange: (view: string) => void }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((u) => {
+      setUser(u);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleSignIn = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.error("Authentication failed:", error);
+    }
+  };
+
+  const handleSignOut = () => {
+    auth.signOut();
+  };
 
   const handleNavClick = (view: string) => {
     onViewChange(view);
@@ -28,12 +50,41 @@ export function Navigation({ currentView, onViewChange }: { currentView: string,
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.7 }}
-          className="hidden md:flex gap-8 text-sm uppercase tracking-widest text-white/70"
+          className="hidden md:flex items-center gap-8 text-sm uppercase tracking-widest text-white/70"
         >
           <button onClick={() => handleNavClick('home')} className={`hover:text-white transition-colors duration-300 ${currentView === 'home' ? 'text-gold-400' : ''}`}>Academy</button>
           <button onClick={() => handleNavClick('vision')} className={`hover:text-white transition-colors duration-300 ${currentView === 'vision' ? 'text-gold-400' : ''}`}>Vision</button>
+          <button onClick={() => handleNavClick('community')} className={`hover:text-white transition-colors duration-300 ${currentView === 'community' || currentView === 'space' ? 'text-gold-400' : ''}`}>Community</button>
           <button onClick={() => handleNavClick('contact')} className={`hover:text-white transition-colors duration-300 ${currentView === 'contact' ? 'text-gold-400' : ''}`}>Contact</button>
-          <button onClick={() => handleNavClick('join')} className={`hover:text-white transition-colors duration-300 ${currentView === 'join' ? 'text-gold-400' : ''}`}>Join</button>
+          
+          <div className="w-px h-4 bg-white/20 mx-2" />
+          
+          {user ? (
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={() => handleNavClick('space')}
+                className="flex items-center gap-2 hover:text-white transition-colors duration-300 text-gold-400"
+              >
+                <UserCircle className="w-4 h-4" />
+                <span className="max-w-[100px] truncate">{user.displayName || 'Profile'}</span>
+              </button>
+              <button 
+                onClick={handleSignOut}
+                className="hover:text-white transition-colors duration-300 text-white/50"
+                title="Sign Out"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <button 
+              onClick={handleSignIn}
+              className="flex items-center gap-2 hover:text-white transition-colors duration-300"
+            >
+              <LogIn className="w-4 h-4" />
+              Sign In
+            </button>
+          )}
         </motion.div>
 
         {/* Mobile Menu Toggle */}
@@ -60,8 +111,25 @@ export function Navigation({ currentView, onViewChange }: { currentView: string,
           >
             <button onClick={() => handleNavClick('home')} className={`text-left hover:text-white transition-colors duration-300 ${currentView === 'home' ? 'text-gold-400' : ''}`}>Academy</button>
             <button onClick={() => handleNavClick('vision')} className={`text-left hover:text-white transition-colors duration-300 ${currentView === 'vision' ? 'text-gold-400' : ''}`}>Vision</button>
+            <button onClick={() => handleNavClick('community')} className={`text-left hover:text-white transition-colors duration-300 ${currentView === 'community' || currentView === 'space' ? 'text-gold-400' : ''}`}>Community</button>
             <button onClick={() => handleNavClick('contact')} className={`text-left hover:text-white transition-colors duration-300 ${currentView === 'contact' ? 'text-gold-400' : ''}`}>Contact</button>
-            <button onClick={() => handleNavClick('join')} className={`text-left hover:text-white transition-colors duration-300 ${currentView === 'join' ? 'text-gold-400' : ''}`}>Join</button>
+            
+            <div className="w-12 h-px bg-white/20 my-2" />
+            
+            {user ? (
+              <>
+                <button onClick={() => handleNavClick('space')} className="text-left text-gold-400 hover:text-gold-300 flex items-center gap-3">
+                  <UserCircle className="w-5 h-5" /> Profile & Space
+                </button>
+                <button onClick={handleSignOut} className="text-left text-white/50 hover:text-white flex items-center gap-3 mt-4 text-sm">
+                  <LogOut className="w-4 h-4" /> Sign Out
+                </button>
+              </>
+            ) : (
+              <button onClick={handleSignIn} className="text-left hover:text-white transition-colors duration-300 flex items-center gap-3">
+                <LogIn className="w-5 h-5" /> Sign In
+              </button>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
