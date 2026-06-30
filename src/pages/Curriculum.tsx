@@ -1,6 +1,8 @@
 import { motion } from 'motion/react';
 import { ArrowRight, BookOpen, Heart, Rocket, Target, Users, Code, LineChart, Cpu, Leaf, Building2, Globe, Music } from 'lucide-react';
 
+import { CurriculumPillars3D } from '../components/CurriculumPillars3D';
+
 export function Curriculum({ onViewChange }: { onViewChange: (view: string) => void }) {
   const ageGroups = [
     {
@@ -61,21 +63,6 @@ export function Curriculum({ onViewChange }: { onViewChange: (view: string) => v
     }
   ];
 
-  const pillarsProgression = [
-    { name: "Consciousness", child: "Emotional awareness", teen: "Self-reflection", youngAdult: "Purpose", adult: "Leadership", icon: <Heart className="w-5 h-5 text-gold-400" /> },
-    { name: "Education", child: "Learning through play", teen: "Study methods", youngAdult: "Career skills", adult: "Lifelong learning", icon: <BookOpen className="w-5 h-5 text-gold-400" /> },
-    { name: "Agriculture", child: "Plant a seed", teen: "School garden", youngAdult: "Sustainable farming", adult: "Agri-business", icon: <Leaf className="w-5 h-5 text-gold-400" /> },
-    { name: "Health", child: "Healthy habits", teen: "Fitness", youngAdult: "Preventive health", adult: "Family wellness", icon: <Heart className="w-5 h-5 text-gold-400" /> },
-    { name: "Science", child: "Experiments", teen: "Scientific thinking", youngAdult: "Research", adult: "Innovation", icon: <Target className="w-5 h-5 text-gold-400" /> },
-    { name: "Technology", child: "Digital literacy", teen: "Programming", youngAdult: "AI & software", adult: "Emerging tech", icon: <Cpu className="w-5 h-5 text-gold-400" /> },
-    { name: "Entrepreneurship", child: "Saving & sharing", teen: "Small projects", youngAdult: "Startups", adult: "Business growth", icon: <LineChart className="w-5 h-5 text-gold-400" /> },
-    { name: "Sustainability", child: "Nature care", teen: "Climate awareness", youngAdult: "Green innovation", adult: "Circular economy", icon: <Globe className="w-5 h-5 text-gold-400" /> },
-    { name: "Architecture", child: "Build models", teen: "Design thinking", youngAdult: "Urban systems", adult: "Smart infrastructure", icon: <Building2 className="w-5 h-5 text-gold-400" /> },
-    { name: "Society", child: "Cooperation", teen: "Civic responsibility", youngAdult: "Governance", adult: "Policy & leadership", icon: <Users className="w-5 h-5 text-gold-400" /> },
-    { name: "Arts & Culture", child: "Creativity", teen: "Expression", youngAdult: "Design & communication", adult: "Cultural leadership", icon: <Music className="w-5 h-5 text-gold-400" /> },
-    { name: "Space & Future", child: "Curiosity", teen: "Astronomy", youngAdult: "Space technology", adult: "Future systems", icon: <Rocket className="w-5 h-5 text-gold-400" /> },
-  ];
-
   return (
     <div className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen">
       <motion.div
@@ -132,34 +119,7 @@ export function Curriculum({ onViewChange }: { onViewChange: (view: string) => v
       >
         <h2 className="text-3xl md:text-4xl font-serif text-white mb-12 text-center">How the 12 Pillars Adapt</h2>
         
-        <div className="overflow-x-auto pb-8">
-          <div className="min-w-[800px]">
-            <div className="grid grid-cols-5 gap-4 mb-4 px-6 text-sm uppercase tracking-widest text-white/40">
-              <div className="col-span-1">Pillar</div>
-              <div className="col-span-1">Child (5-12)</div>
-              <div className="col-span-1">Teen (13-16)</div>
-              <div className="col-span-1">Young Adult (17-30)</div>
-              <div className="col-span-1">Adult (31+)</div>
-            </div>
-            
-            <div className="space-y-3">
-              {pillarsProgression.map((pillar, index) => (
-                <div key={index} className="grid grid-cols-5 gap-4 items-center bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-colors">
-                  <div className="col-span-1 flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-black/20">
-                      {pillar.icon}
-                    </div>
-                    <span className="font-serif text-white">{pillar.name}</span>
-                  </div>
-                  <div className="col-span-1 text-white/60 font-light text-sm">{pillar.child}</div>
-                  <div className="col-span-1 text-white/60 font-light text-sm">{pillar.teen}</div>
-                  <div className="col-span-1 text-white/60 font-light text-sm">{pillar.youngAdult}</div>
-                  <div className="col-span-1 text-white/60 font-light text-sm">{pillar.adult}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <CurriculumPillars3D />
       </motion.div>
 
       <motion.div

@@ -30,36 +30,37 @@ export function Home({ onViewChange }: { onViewChange: (view: string) => void })
   return (
     <>
       {/* Hero Section */}
-      <section ref={heroRef} className="relative h-screen flex flex-col items-center justify-center z-10 px-4 overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[100dvh] flex flex-col items-center justify-center z-10 px-6 overflow-hidden pt-32 pb-20">
         <motion.div 
           style={{ opacity: heroOpacity, scale: heroScale, y: heroY, filter: heroFilter }} 
-          className="flex flex-col items-center w-full max-w-4xl relative z-10"
+          className="flex flex-col items-center w-full max-w-5xl relative z-10 text-center"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 2, ease: "easeOut" }}
-            className="mb-8 w-[250px] h-[250px] md:w-[350px] md:h-[350px] flex items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-            style={{ marginTop: '-150px' }}
+            className="w-[200px] h-[200px] md:w-[300px] md:h-[300px] flex items-center justify-center relative pointer-events-none mb-12"
           >
-            <GeometricLotus />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <GeometricLotus />
+            </div>
           </motion.div>
 
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 1 }}
-            className="text-4xl sm:text-5xl md:text-7xl font-serif text-center font-medium tracking-tight mb-6 mt-[350px]"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-medium tracking-tight mb-8"
           >
-            <span className="block text-white/80 text-xl sm:text-2xl md:text-3xl mb-4 tracking-widest">WELCOME TO</span>
-            <span className="text-gradient">Satya Civilization Academy</span>
+            <span className="block text-white/80 text-lg sm:text-xl md:text-2xl mb-6 tracking-[0.3em] uppercase font-sans">Welcome To</span>
+            <span className="text-gradient leading-tight">Satya Civilization<br/>Academy</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 1.5 }}
-            className="text-white/60 text-base md:text-xl text-center max-w-2xl font-light leading-relaxed mb-12"
+            className="text-white/60 text-lg md:text-2xl max-w-3xl font-light leading-relaxed mb-12"
           >
             Awakening human potential through ancient wisdom and future technologies. 
             Step into the next phase of conscious evolution.
@@ -69,9 +70,10 @@ export function Home({ onViewChange }: { onViewChange: (view: string) => void })
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 2.5 }}
-            className="group relative px-8 py-3 overflow-hidden rounded-full border border-gold-500/30 bg-transparent backdrop-blur-sm hover:bg-gold-500/10 transition-all duration-500"
+            className="group relative px-10 py-4 overflow-hidden rounded-full border border-gold-500/30 bg-black/50 backdrop-blur-md hover:bg-gold-500/10 hover:border-gold-500/60 transition-all duration-500"
+            onClick={() => onViewChange('vision')}
           >
-            <span className="relative z-10 font-sans uppercase tracking-widest text-sm text-gold-300 flex items-center gap-2">
+            <span className="relative z-10 font-sans uppercase tracking-[0.2em] text-sm text-gold-300 group-hover:text-gold-200 flex items-center gap-3">
               Begin Journey <Sparkles className="w-4 h-4" />
             </span>
             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-gold-500/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
@@ -84,47 +86,49 @@ export function Home({ onViewChange }: { onViewChange: (view: string) => void })
           transition={{ duration: 1, delay: 3 }}
           className="absolute bottom-10 animate-bounce text-white/30 hidden md:block"
         >
-          <ChevronDown className="w-6 h-6" />
+          <ChevronDown className="w-8 h-8" />
         </motion.div>
       </section>
 
       {/* Vision Section Overview */}
-      <section id="vision" ref={visionRef} className="relative py-32 md:py-48 z-10 px-6 max-w-6xl mx-auto">
-        <motion.div style={{ y: visionY, opacity: visionOpacity }} className="grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-serif text-gold-400 mb-8">The Genesis<br/>of Truth</h2>
-            <p className="text-white/70 text-lg leading-relaxed mb-6 font-light">
-              At Satya, we believe civilization is not merely a collection of technologies and cities, but an ongoing expression of human consciousness.
-            </p>
-            <p className="text-white/70 text-lg leading-relaxed font-light mb-8">
-              We bridge the gap between ancient spiritual sciences—represented by the unfolding lotus—and the cinematic frontier of human achievement. 
-              Our curriculum is designed to evolve not just the intellect, but the soul.
-            </p>
-            <button 
-              onClick={() => onViewChange('vision')}
-              className="group relative inline-flex items-center gap-4 text-gold-300 uppercase tracking-widest text-sm font-medium hover:text-white transition-colors"
-            >
-              <span className="w-8 h-px bg-gold-500/50 group-hover:w-12 group-hover:bg-gold-300 transition-all duration-300" />
-              Read Full Vision
-            </button>
-          </div>
-          <div className="relative aspect-square rounded-full border border-gold-500/30 flex items-center justify-center p-8 md:p-12 overflow-hidden mx-auto w-full max-w-[400px] shadow-[0_0_50px_rgba(194,153,43,0.1)] group">
-             <div className="absolute inset-0 bg-black rounded-full" />
-             <div className="absolute inset-0 stars rounded-full opacity-60 mix-blend-screen" />
-             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)] rounded-full" />
-             <div className="relative z-10 w-full h-full flex items-center justify-center transition-transform duration-1000 group-hover:scale-110">
-                <GeometricLotus />
-             </div>
-             <div className="absolute inset-0 border-[1px] border-gold-500/20 rounded-full animate-[spin_60s_linear_infinite]" />
-             <div className="absolute inset-4 border-[1px] border-gold-500/30 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
-             <div className="absolute inset-8 border-[1px] border-white/10 rounded-full animate-[spin_30s_linear_infinite]" />
-          </div>
-        </motion.div>
+      <section id="vision" ref={visionRef} className="relative py-32 md:py-48 z-10 px-6">
+        <div className="max-w-6xl mx-auto">
+          <motion.div style={{ y: visionY, opacity: visionOpacity }} className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-serif text-gold-400 mb-8">The Genesis<br/>of Truth</h2>
+              <p className="text-white/70 text-lg leading-relaxed mb-6 font-light">
+                At Satya, we believe civilization is not merely a collection of technologies and cities, but an ongoing expression of human consciousness.
+              </p>
+              <p className="text-white/70 text-lg leading-relaxed font-light mb-8">
+                We bridge the gap between ancient spiritual sciences—represented by the unfolding lotus—and the cinematic frontier of human achievement. 
+                Our curriculum is designed to evolve not just the intellect, but the soul.
+              </p>
+              <button 
+                onClick={() => onViewChange('vision')}
+                className="group relative inline-flex items-center gap-4 text-gold-300 uppercase tracking-widest text-sm font-medium hover:text-white transition-colors"
+              >
+                <span className="w-8 h-px bg-gold-500/50 group-hover:w-12 group-hover:bg-gold-300 transition-all duration-300" />
+                Read Full Vision
+              </button>
+            </div>
+            <div className="relative aspect-square rounded-full border border-gold-500/30 flex items-center justify-center p-8 md:p-12 overflow-hidden mx-auto w-full max-w-[400px] shadow-[0_0_50px_rgba(194,153,43,0.1)] group">
+               <div className="absolute inset-0 bg-black rounded-full" />
+               <div className="absolute inset-0 stars rounded-full opacity-60 mix-blend-screen" />
+               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)] rounded-full" />
+               <div className="relative z-10 w-full h-full flex items-center justify-center transition-transform duration-1000 group-hover:scale-110">
+                  <GeometricLotus />
+               </div>
+               <div className="absolute inset-0 border-[1px] border-gold-500/20 rounded-full animate-[spin_60s_linear_infinite]" />
+               <div className="absolute inset-4 border-[1px] border-gold-500/30 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
+               <div className="absolute inset-8 border-[1px] border-white/10 rounded-full animate-[spin_30s_linear_infinite]" />
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Pillars Section */}
-      <section id="academy" className="relative py-32 md:py-48 z-10 px-6 bg-black/50 border-y border-white/5">
-        <div className="max-w-7xl mx-auto overflow-hidden">
+      <section id="academy" className="relative py-32 md:py-48 z-10 px-6 bg-black/50 border-y border-white/5 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -255,107 +259,111 @@ export function Home({ onViewChange }: { onViewChange: (view: string) => void })
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="relative py-32 md:py-48 z-10 px-6 max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-16 backdrop-blur-sm"
-        >
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-serif text-white mb-6">Connect With Us</h2>
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-8" />
-            <p className="text-white/60 font-light text-lg">
-              Reach out to us to learn more about our academy, partnerships, or to inquire about joining our civilization.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-16 items-start">
-            <div className="space-y-8">
-              <div className="flex items-start gap-6 group">
-                <div className="w-12 h-12 rounded-full border border-gold-500/30 bg-transparent backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:border-gold-500/60 transition-colors">
-                  <User className="w-5 h-5 text-gold-400" />
-                </div>
-                <div>
-                  <h4 className="text-white font-serif mb-1">Akash Shivapure</h4>
-                  <p className="text-white/50 text-sm font-light">Founder and CEO, Satya Civilization Academy</p>
-                </div>
-              </div>
-
-              <a href="tel:9975577966" className="flex items-start gap-6 group block w-full hover:bg-white/[0.02] p-4 -ml-4 rounded-xl transition-colors">
-                <div className="w-12 h-12 rounded-full border border-gold-500/30 bg-transparent backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:border-gold-500/60 transition-colors">
-                  <Phone className="w-5 h-5 text-gold-400" />
-                </div>
-                <div>
-                  <h4 className="text-white font-serif mb-1">Phone</h4>
-                  <p className="text-white/50 text-sm font-light mb-1">Direct contact:</p>
-                  <span className="text-gold-300 group-hover:text-white transition-colors text-sm tracking-wide">9975577966</span>
-                </div>
-              </a>
-              
-              <a href="mailto:shivapurefamily@gmail.com" className="flex items-start gap-6 group block w-full hover:bg-white/[0.02] p-4 -ml-4 rounded-xl transition-colors">
-                <div className="w-12 h-12 rounded-full border border-gold-500/30 bg-transparent backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:border-gold-500/60 transition-colors">
-                  <Mail className="w-5 h-5 text-gold-400" />
-                </div>
-                <div>
-                  <h4 className="text-white font-serif mb-1">Email</h4>
-                  <p className="text-white/50 text-sm font-light mb-1">For general questions and partnerships:</p>
-                  <span className="text-gold-300 group-hover:text-white transition-colors text-sm tracking-wide">shivapurefamily@gmail.com</span>
-                </div>
-              </a>
+      <section id="contact" className="relative py-32 md:py-48 z-10 px-6">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-16 backdrop-blur-sm"
+          >
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-serif text-white mb-6">Connect With Us</h2>
+              <div className="w-20 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-8" />
+              <p className="text-white/60 font-light text-lg">
+                Reach out to us to learn more about our academy, partnerships, or to inquire about joining our civilization.
+              </p>
             </div>
 
-            <div className="pt-8 md:pt-0 md:pl-16 md:border-l border-t md:border-t-0 border-white/10 flex flex-col justify-center h-full">
-              <h4 className="text-white font-serif mb-8 text-center md:text-left">CONNECT WITH AKASH</h4>
-              <div className="flex gap-6 justify-center md:justify-start">
-                {[
-                  { icon: <Linkedin className="w-6 h-6" />, href: "https://www.linkedin.com/in/akash-s-853347152?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
-                  { icon: <Instagram className="w-6 h-6" />, href: "https://www.instagram.com/akash_shivapure?igsh=MWQyNjVzOXhxN3Bscg==" }
-                ].map((social, i) => (
-                  <a 
-                    key={i} 
-                    href={social.href} 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/50 hover:text-gold-400 hover:border-gold-500/50 hover:bg-gold-500/10 transition-all duration-300 shadow-lg"
-                  >
-                    {social.icon}
-                  </a>
-                ))}
+            <div className="grid md:grid-cols-2 gap-16 items-start">
+              <div className="space-y-8">
+                <div className="flex items-start gap-6 group">
+                  <div className="w-12 h-12 rounded-full border border-gold-500/30 bg-transparent backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:border-gold-500/60 transition-colors">
+                    <User className="w-5 h-5 text-gold-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-serif mb-1">Akash Shivapure</h4>
+                    <p className="text-white/50 text-sm font-light">Founder and CEO, Satya Civilization Academy</p>
+                  </div>
+                </div>
+
+                <a href="tel:9975577966" className="flex items-start gap-6 group block w-full hover:bg-white/[0.02] p-4 -ml-4 rounded-xl transition-colors">
+                  <div className="w-12 h-12 rounded-full border border-gold-500/30 bg-transparent backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:border-gold-500/60 transition-colors">
+                    <Phone className="w-5 h-5 text-gold-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-serif mb-1">Phone</h4>
+                    <p className="text-white/50 text-sm font-light mb-1">Direct contact:</p>
+                    <span className="text-gold-300 group-hover:text-white transition-colors text-sm tracking-wide">9975577966</span>
+                  </div>
+                </a>
+                
+                <a href="mailto:shivapurefamily@gmail.com" className="flex items-start gap-6 group block w-full hover:bg-white/[0.02] p-4 -ml-4 rounded-xl transition-colors">
+                  <div className="w-12 h-12 rounded-full border border-gold-500/30 bg-transparent backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:border-gold-500/60 transition-colors">
+                    <Mail className="w-5 h-5 text-gold-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-serif mb-1">Email</h4>
+                    <p className="text-white/50 text-sm font-light mb-1">For general questions and partnerships:</p>
+                    <span className="text-gold-300 group-hover:text-white transition-colors text-sm tracking-wide">shivapurefamily@gmail.com</span>
+                  </div>
+                </a>
+              </div>
+
+              <div className="pt-8 md:pt-0 md:pl-16 md:border-l border-t md:border-t-0 border-white/10 flex flex-col justify-center h-full">
+                <h4 className="text-white font-serif mb-8 text-center md:text-left">CONNECT WITH AKASH</h4>
+                <div className="flex gap-6 justify-center md:justify-start">
+                  {[
+                    { icon: <Linkedin className="w-6 h-6" />, href: "https://www.linkedin.com/in/akash-s-853347152?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
+                    { icon: <Instagram className="w-6 h-6" />, href: "https://www.instagram.com/akash_shivapure?igsh=MWQyNjVzOXhxN3Bscg==" }
+                  ].map((social, i) => (
+                    <a 
+                      key={i} 
+                      href={social.href} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/50 hover:text-gold-400 hover:border-gold-500/50 hover:bg-gold-500/10 transition-all duration-300 shadow-lg"
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Footer / CTA */}
-      <footer id="join" className="relative py-32 md:py-48 z-10 px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="max-w-2xl mx-auto flex flex-col items-center"
-        >
-          <div className="w-20 h-20 mb-10 opacity-50">
-             <GeometricLotus />
-          </div>
-          <h2 className="text-4xl md:text-5xl font-serif text-white mb-8">Ready to Ascend?</h2>
-          <p className="text-white/50 mb-12 font-light text-lg">
-            Enrollment is open for the next cycle. Space is strictly limited to preserve the transmission of knowledge.
-          </p>
-          <button 
-            onClick={() => onViewChange('join')}
-            className="px-10 py-4 md:px-14 md:py-5 bg-white text-black font-sans uppercase tracking-[0.25em] text-xs md:text-sm font-semibold hover:bg-gold-300 transition-colors duration-500"
+      <footer id="join" className="relative py-32 md:py-48 z-10 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col items-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="max-w-2xl mx-auto flex flex-col items-center text-center"
           >
-            Apply Now
-          </button>
-        </motion.div>
-        
-        <div className="mt-32 md:mt-48 pt-10 border-t border-white/5 text-white/30 text-[10px] md:text-xs font-sans tracking-[0.2em] uppercase flex flex-col md:flex-row justify-between items-center gap-6 max-w-6xl mx-auto">
-          <span>&copy; 2026 Satya Civilization Academy</span>
-          <span>Transcendence Awaits</span>
+            <div className="w-20 h-20 mb-10 opacity-50">
+               <GeometricLotus />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-serif text-white mb-8">Ready to Ascend?</h2>
+            <p className="text-white/50 mb-12 font-light text-lg">
+              Enrollment is open for the next cycle. Space is strictly limited to preserve the transmission of knowledge.
+            </p>
+            <button 
+              onClick={() => onViewChange('join')}
+              className="px-10 py-4 md:px-14 md:py-5 bg-white text-black font-sans uppercase tracking-[0.25em] text-xs md:text-sm font-semibold hover:bg-gold-300 transition-colors duration-500"
+            >
+              Apply Now
+            </button>
+          </motion.div>
+          
+          <div className="w-full mt-32 md:mt-48 pt-10 border-t border-white/5 text-white/30 text-[10px] md:text-xs font-sans tracking-[0.2em] uppercase flex flex-col md:flex-row justify-between items-center gap-6">
+            <span>&copy; 2026 Satya Civilization Academy</span>
+            <span>Transcendence Awaits</span>
+          </div>
         </div>
       </footer>
     </>
