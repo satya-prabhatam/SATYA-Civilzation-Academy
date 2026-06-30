@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Send, Brain, Sparkles, Loader2, MessageSquare, CornerDownRight, Radio, LogIn, Download, MoreHorizontal, Edit2, Heart, Users, Trash2 } from 'lucide-react';
-import { auth, db, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, updateDoc, deleteDoc, signInWithPopup, GoogleAuthProvider } from '../lib/firebase';
+import { auth, db, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, updateDoc, deleteDoc, signInWithPopup, getRedirectResult, GoogleAuthProvider } from '../lib/firebase';
 import ReactMarkdown from 'react-markdown';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -52,6 +52,15 @@ export function Space() {
   }, []);
 
   useEffect(() => {
+    const checkRedirectResult = async () => {
+      try {
+        await getRedirectResult(auth);
+      } catch (error: any) {
+        console.error("Redirect auth error:", error);
+      }
+    };
+    checkRedirectResult();
+
     const unsubscribeAuth = auth.onAuthStateChanged((u) => {
       setUser(u);
       setAuthLoading(false);
@@ -64,8 +73,9 @@ export function Space() {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Authentication failed:", error);
+      alert("Sign in failed: " + (error.message || "Please check if popups are allowed or if this domain is authorized in Firebase."));
     }
   };
 

@@ -6,9 +6,9 @@ import { Vision } from './pages/Vision';
 import { Join } from './pages/Join';
 import { Apply } from './pages/Apply';
 import { Charter } from './pages/Charter';
-import { Contact } from './pages/Contact';
 import { Community } from './pages/Community';
 import { Space } from './pages/Space';
+import { Curriculum } from './pages/Curriculum';
 import { RippleEffect } from './components/RippleEffect';
 import { HeartbeatEffect } from './components/HeartbeatEffect';
 
@@ -47,9 +47,9 @@ export default function App() {
         {currentView === 'join' && <Join onViewChange={setCurrentView} />}
         {currentView === 'apply' && <Apply onViewChange={setCurrentView} />}
         {currentView === 'charter' && <Charter onViewChange={setCurrentView} />}
-        {currentView === 'contact' && <Contact />}
         {currentView === 'community' && <Community onViewChange={setCurrentView} />}
         {currentView === 'space' && <Space />}
+        {currentView === 'curriculum' && <Curriculum onViewChange={setCurrentView} />}
       </main>
     </div>
   );

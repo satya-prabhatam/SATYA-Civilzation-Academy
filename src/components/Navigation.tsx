@@ -18,8 +18,9 @@ export function Navigation({ currentView, onViewChange }: { currentView: string,
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Authentication failed:", error);
+      alert("Sign in failed: " + (error.message || "Please check if popups are allowed or if this domain is authorized in Firebase."));
     }
   };
 
@@ -54,8 +55,8 @@ export function Navigation({ currentView, onViewChange }: { currentView: string,
         >
           <button onClick={() => handleNavClick('home')} className={`hover:text-white transition-colors duration-300 ${currentView === 'home' ? 'text-gold-400' : ''}`}>Academy</button>
           <button onClick={() => handleNavClick('vision')} className={`hover:text-white transition-colors duration-300 ${currentView === 'vision' ? 'text-gold-400' : ''}`}>Vision</button>
+          <button onClick={() => handleNavClick('curriculum')} className={`hover:text-white transition-colors duration-300 ${currentView === 'curriculum' ? 'text-gold-400' : ''}`}>Curriculum</button>
           <button onClick={() => handleNavClick('community')} className={`hover:text-white transition-colors duration-300 ${currentView === 'community' || currentView === 'space' ? 'text-gold-400' : ''}`}>Community</button>
-          <button onClick={() => handleNavClick('contact')} className={`hover:text-white transition-colors duration-300 ${currentView === 'contact' ? 'text-gold-400' : ''}`}>Contact</button>
           
           <div className="w-px h-4 bg-white/20 mx-2" />
           
@@ -111,8 +112,8 @@ export function Navigation({ currentView, onViewChange }: { currentView: string,
           >
             <button onClick={() => handleNavClick('home')} className={`text-left hover:text-white transition-colors duration-300 ${currentView === 'home' ? 'text-gold-400' : ''}`}>Academy</button>
             <button onClick={() => handleNavClick('vision')} className={`text-left hover:text-white transition-colors duration-300 ${currentView === 'vision' ? 'text-gold-400' : ''}`}>Vision</button>
+            <button onClick={() => handleNavClick('curriculum')} className={`text-left hover:text-white transition-colors duration-300 ${currentView === 'curriculum' ? 'text-gold-400' : ''}`}>Curriculum</button>
             <button onClick={() => handleNavClick('community')} className={`text-left hover:text-white transition-colors duration-300 ${currentView === 'community' || currentView === 'space' ? 'text-gold-400' : ''}`}>Community</button>
-            <button onClick={() => handleNavClick('contact')} className={`text-left hover:text-white transition-colors duration-300 ${currentView === 'contact' ? 'text-gold-400' : ''}`}>Contact</button>
             
             <div className="w-12 h-px bg-white/20 my-2" />
             

@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { GeometricLotus } from '../components/Lotus';
-import { Sparkles, BookOpen, ChevronDown, Brain, Atom, Zap, Leaf, HeartPulse, Building2, Briefcase, Scale, Landmark, Users, Rocket, Orbit } from 'lucide-react';
+import { Pillars3D } from '../components/Pillars3D';
+import { Sparkles, BookOpen, ChevronDown, Brain, Atom, Zap, Leaf, HeartPulse, Building2, Briefcase, Scale, Landmark, Users, Rocket, Orbit, Phone, User, Mail, Linkedin, Instagram } from 'lucide-react';
 import { useRef } from 'react';
 
 export function Home({ onViewChange }: { onViewChange: (view: string) => void }) {
@@ -123,17 +124,22 @@ export function Home({ onViewChange }: { onViewChange: (view: string) => void })
 
       {/* Pillars Section */}
       <section id="academy" className="relative py-32 md:py-48 z-10 px-6 bg-black/50 border-y border-white/5">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto overflow-hidden">
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             viewport={{ once: true, margin: "-100px" }}
-            className="text-center mb-20 md:mb-24"
+            className="text-center mb-10 md:mb-16"
           >
             <h2 className="text-4xl md:text-6xl font-serif text-white mb-6">Pillars of Civilization</h2>
             <div className="w-32 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto" />
           </motion.div>
+
+          {/* 3D Pillars Animation */}
+          <div className="mb-32">
+            <Pillars3D />
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
             {[
@@ -246,6 +252,81 @@ export function Home({ onViewChange }: { onViewChange: (view: string) => void })
             </button>
           </motion.div>
         </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="relative py-32 md:py-48 z-10 px-6 max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-16 backdrop-blur-sm"
+        >
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-serif text-white mb-6">Connect With Us</h2>
+            <div className="w-20 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mb-8" />
+            <p className="text-white/60 font-light text-lg">
+              Reach out to us to learn more about our academy, partnerships, or to inquire about joining our civilization.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div className="space-y-8">
+              <div className="flex items-start gap-6 group">
+                <div className="w-12 h-12 rounded-full border border-gold-500/30 bg-transparent backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:border-gold-500/60 transition-colors">
+                  <User className="w-5 h-5 text-gold-400" />
+                </div>
+                <div>
+                  <h4 className="text-white font-serif mb-1">Akash Shivapure</h4>
+                  <p className="text-white/50 text-sm font-light">Founder and CEO, Satya Civilization Academy</p>
+                </div>
+              </div>
+
+              <a href="tel:9975577966" className="flex items-start gap-6 group block w-full hover:bg-white/[0.02] p-4 -ml-4 rounded-xl transition-colors">
+                <div className="w-12 h-12 rounded-full border border-gold-500/30 bg-transparent backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:border-gold-500/60 transition-colors">
+                  <Phone className="w-5 h-5 text-gold-400" />
+                </div>
+                <div>
+                  <h4 className="text-white font-serif mb-1">Phone</h4>
+                  <p className="text-white/50 text-sm font-light mb-1">Direct contact:</p>
+                  <span className="text-gold-300 group-hover:text-white transition-colors text-sm tracking-wide">9975577966</span>
+                </div>
+              </a>
+              
+              <a href="mailto:shivapurefamily@gmail.com" className="flex items-start gap-6 group block w-full hover:bg-white/[0.02] p-4 -ml-4 rounded-xl transition-colors">
+                <div className="w-12 h-12 rounded-full border border-gold-500/30 bg-transparent backdrop-blur-sm flex items-center justify-center shrink-0 group-hover:border-gold-500/60 transition-colors">
+                  <Mail className="w-5 h-5 text-gold-400" />
+                </div>
+                <div>
+                  <h4 className="text-white font-serif mb-1">Email</h4>
+                  <p className="text-white/50 text-sm font-light mb-1">For general questions and partnerships:</p>
+                  <span className="text-gold-300 group-hover:text-white transition-colors text-sm tracking-wide">shivapurefamily@gmail.com</span>
+                </div>
+              </a>
+            </div>
+
+            <div className="pt-8 md:pt-0 md:pl-16 md:border-l border-t md:border-t-0 border-white/10 flex flex-col justify-center h-full">
+              <h4 className="text-white font-serif mb-8 text-center md:text-left">CONNECT WITH AKASH</h4>
+              <div className="flex gap-6 justify-center md:justify-start">
+                {[
+                  { icon: <Linkedin className="w-6 h-6" />, href: "https://www.linkedin.com/in/akash-s-853347152?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
+                  { icon: <Instagram className="w-6 h-6" />, href: "https://www.instagram.com/akash_shivapure?igsh=MWQyNjVzOXhxN3Bscg==" }
+                ].map((social, i) => (
+                  <a 
+                    key={i} 
+                    href={social.href} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/50 hover:text-gold-400 hover:border-gold-500/50 hover:bg-gold-500/10 transition-all duration-300 shadow-lg"
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* Footer / CTA */}

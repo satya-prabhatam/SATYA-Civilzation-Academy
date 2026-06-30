@@ -15,6 +15,20 @@ export function Apply({ onViewChange }: { onViewChange: (view: string) => void }
     visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } }
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const interest = formData.get('interest');
+    const contribution = formData.get('contribution');
+    
+    const subject = encodeURIComponent('Application to SATYA');
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nArea of Interest: ${interest}\n\nContribution:\n${contribution}`);
+    
+    window.location.href = `mailto:shivapurefamily@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   return (
     <div className="pt-32 pb-32 px-6 max-w-4xl mx-auto z-10 relative">
       <motion.div
@@ -56,6 +70,7 @@ export function Apply({ onViewChange }: { onViewChange: (view: string) => void }
             Before you begin your application, please take a moment to read our principles.
           </p>
           <button 
+            type="button"
             onClick={() => onViewChange('charter')}
             className="px-8 py-3 border border-gold-500 text-gold-400 font-sans uppercase tracking-[0.2em] text-xs font-semibold hover:bg-gold-500/10 transition-colors duration-300"
           >
@@ -69,19 +84,20 @@ export function Apply({ onViewChange }: { onViewChange: (view: string) => void }
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
         className="space-y-8 max-w-2xl mx-auto"
+        onSubmit={handleSubmit}
       >
         <div className="space-y-6">
           <div>
             <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">Full Name</label>
-            <input type="text" className="w-full bg-transparent backdrop-blur-sm border border-white/10 rounded-lg px-4 py-4 text-white focus:outline-none focus:border-gold-500/50 transition-colors" placeholder="Enter your name" />
+            <input name="name" type="text" required className="w-full bg-transparent backdrop-blur-sm border border-white/10 rounded-lg px-4 py-4 text-white focus:outline-none focus:border-gold-500/50 transition-colors" placeholder="Enter your name" />
           </div>
           <div>
             <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">Email Address</label>
-            <input type="email" className="w-full bg-transparent backdrop-blur-sm border border-white/10 rounded-lg px-4 py-4 text-white focus:outline-none focus:border-gold-500/50 transition-colors" placeholder="Enter your email" />
+            <input name="email" type="email" required className="w-full bg-transparent backdrop-blur-sm border border-white/10 rounded-lg px-4 py-4 text-white focus:outline-none focus:border-gold-500/50 transition-colors" placeholder="Enter your email" />
           </div>
           <div>
             <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">Primary Area of Interest</label>
-            <select className="w-full bg-void/50 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-4 text-white focus:outline-none focus:border-gold-500/50 transition-colors appearance-none">
+            <select name="interest" required className="w-full bg-void/50 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-4 text-white focus:outline-none focus:border-gold-500/50 transition-colors appearance-none">
               <option>Student / Learner</option>
               <option>Research & Science</option>
               <option>Engineering & Technology</option>
@@ -94,7 +110,7 @@ export function Apply({ onViewChange }: { onViewChange: (view: string) => void }
           </div>
           <div>
             <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">How would you like to contribute?</label>
-            <textarea rows={5} className="w-full bg-transparent backdrop-blur-sm border border-white/10 rounded-lg px-4 py-4 text-white focus:outline-none focus:border-gold-500/50 transition-colors resize-none" placeholder="Tell us about your skills, passions, and how you envision participating in SATYA..."></textarea>
+            <textarea name="contribution" required rows={5} className="w-full bg-transparent backdrop-blur-sm border border-white/10 rounded-lg px-4 py-4 text-white focus:outline-none focus:border-gold-500/50 transition-colors resize-none" placeholder="Tell us about your skills, passions, and how you envision participating in SATYA..."></textarea>
           </div>
         </div>
 
@@ -105,7 +121,7 @@ export function Apply({ onViewChange }: { onViewChange: (view: string) => void }
           </label>
         </div>
 
-        <button type="button" onClick={() => onViewChange('home')} className="w-full px-8 py-5 bg-white text-black font-sans uppercase tracking-[0.25em] text-sm font-semibold hover:bg-gold-300 transition-colors duration-500">
+        <button type="submit" className="w-full px-8 py-5 bg-white text-black font-sans uppercase tracking-[0.25em] text-sm font-semibold hover:bg-gold-300 transition-colors duration-500">
           Submit Application
         </button>
       </motion.form>
